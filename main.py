@@ -12,7 +12,7 @@ app = FastAPI(title="Sawariya Confectionary")
 # app.add_middleware(SessionMiddleware, secret_key="change-this-secret-key")
 app.add_middleware(
     SessionMiddleware,
-    secret_key="change-this-secret-key",
+    secret_key="sawariya-confectionary-secret-key-2026",
     https_only=True,
     same_site="lax"
 )
@@ -61,17 +61,38 @@ def login_page(request: Request):
     context={"error": None}
 )
 
-@app.post("/login", response_class=HTMLResponse)
-def login(request: Request, username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+# @app.post("/login", response_class=HTMLResponse)
+# def login(request: Request, username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+#     user = db.query(User).filter(User.username == username).first()
+#     if not user or not pwd_context.verify(password, user.password_hash):
+#     #     return templates.TemplateResponse("login.html", {"request": request, "error": "Invalid username or password"})
+#     # request.session["username"] = username
+#         return templates.TemplateResponse(
+#     request=request,
+#     name="login.html",
+#     context={"error": "Invalid username or password"}
+# )
+#     return RedirectResponse("/products", status_code=303)
+
+@app.post("/login")
+def login(
+    request: Request,
+    username: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
     user = db.query(User).filter(User.username == username).first()
+
     if not user or not pwd_context.verify(password, user.password_hash):
-    #     return templates.TemplateResponse("login.html", {"request": request, "error": "Invalid username or password"})
-    # request.session["username"] = username
         return templates.TemplateResponse(
-    request=request,
-    name="login.html",
-    context={"error": "Invalid username or password"}
-)
+            request=request,
+            name="login.html",
+            context={"error": "Invalid username or password"}
+        )
+
+    request.session.clear()
+    request.session["username"] = user.username
+
     return RedirectResponse("/products", status_code=303)
 
 @app.get("/logout")
