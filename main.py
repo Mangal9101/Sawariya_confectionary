@@ -9,7 +9,13 @@ from models import User, Product
 from passlib.context import CryptContext
 
 app = FastAPI(title="Sawariya Confectionary")
-app.add_middleware(SessionMiddleware, secret_key="change-this-secret-key")
+# app.add_middleware(SessionMiddleware, secret_key="change-this-secret-key")
+app.add_middleware(
+    SessionMiddleware,
+    secret_key="change-this-secret-key",
+    https_only=True,
+    same_site="lax"
+)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
