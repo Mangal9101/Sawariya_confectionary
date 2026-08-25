@@ -1,0 +1,28 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#241b15;background:#f8f5f0}
+.home{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3b1d0d,#9b5427 48%,#f1c27d);position:relative;overflow:hidden}
+.home:before{content:"🍫  🍬  🍭  🧁  🍪  🍫  🍬";position:absolute;font-size:70px;opacity:.12;transform:rotate(-15deg);white-space:nowrap}
+.overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,transparent,rgba(0,0,0,.48))}
+.hero{position:relative;z-index:1;text-align:center;color:#fff;max-width:850px;padding:40px}
+.badge{display:inline-block;padding:9px 18px;border:1px solid rgba(255,255,255,.4);border-radius:30px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);margin-bottom:22px}
+.hero h1{font-size:clamp(44px,8vw,88px);line-height:.92;margin:0;font-weight:900;letter-spacing:4px;text-shadow:0 8px 30px rgba(0,0,0,.3)}
+.hero h1 span{font-size:.62em;letter-spacing:8px}
+.hero p{font-size:19px;opacity:.9;margin:28px auto;max-width:620px}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.primary{background:#7a3517;color:#fff;box-shadow:0 8px 20px rgba(75,30,10,.2)}
+.primary:hover{background:#5e2811}
+.secondary{background:#eee7de;color:#3d2b20}
+.full{width:100%;margin-top:10px}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f6e4c8,#d49a62)}
+.login-card{width:min(430px,92%);background:#fff;border-radius:24px;padding:38px;box-shadow:0 25px 70px rgba(50,25,10,.18);text-align:center}
+.logo{font-size:55px}.login-card h1{margin:10px 0 5px;color:#632b14}.muted{color:#786f68}
+label{display:block;text-align:left;font-weight:700;margin:16px 0 7px}
+input{width:100%;padding:13px 14px;border:1px solid #ddd1c5;border-radius:10px;font-size:15px;outline:none;background:#fff}
+input:focus{border-color:#9b5427;box-shadow:0 0 0 3px rgba(155,84,39,.1)}
+.error{background:#ffe5e0;color:#9d2b18;padding:10px;border-radius:9px;margin:16px 0;text-align:left}.back{display:block;margin-top:20px;color:#7a3517;text-decoration:none}
+.dashboard{min-height:100vh;background:#f5f1eb}.topbar{background:#3a1f12;color:white;padding:17px 5%;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand{font-weight:900;font-size:20px}.topbar small{opacity:.7}.user-area{display:flex;gap:18px;align-items:center}.user-area a{color:#ffd5ae;text-decoration:none}
+.container{width:min(1200px,92%);margin:35px auto}.heading-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.heading-row h2{margin:0;font-size:32px}.search{display:flex;gap:10px;margin:25px 0}.search input{flex:1}.clear{padding:13px;color:#7a3517}
+.table-wrap{background:#fff;border-radius:18px;box-shadow:0 10px 35px rgba(70,40,15,.08);overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:780px}th,td{padding:17px 18px;border-bottom:1px solid #eee5dc;text-align:left}th{background:#faf7f3;color:#624b3c;font-size:14px}td{font-size:15px}.product-name{font-weight:700}.actions{display:flex;gap:7px}.icon{border:0;border-radius:8px;padding:8px 10px;cursor:pointer;font-weight:700}.edit{background:#fff0db;color:#8a4a16}.delete{background:#ffe4e1;color:#a22e20}.actions form{margin:0}.empty{text-align:center;padding:40px;color:#8a8078}
+.modal{position:fixed;inset:0;background:rgba(20,12,8,.58);display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-card{background:white;border-radius:20px;width:min(500px,100%);padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.25)}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h3{margin:0;color:#5f2b16}.modal-head button{border:0;background:none;font-size:28px;cursor:pointer}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+@media(max-width:650px){.topbar{align-items:flex-start;flex-direction:column}.user-area{width:100%;justify-content:space-between}.heading-row{align-items:flex-start;flex-direction:column}.search{flex-wrap:wrap}.search input{min-width:100%}}

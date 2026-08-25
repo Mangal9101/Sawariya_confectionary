@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Sawariya Confectionary</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dashboard">
+  <header class="topbar">
+    <div>
+      <div class="brand">🍬 SAWARIYA CONFECTIONARY</div>
+      <small>Product Management</small>
+    </div>
+    <div class="user-area">👤 {{ username }} <a href="/logout">Logout</a></div>
+  </header>
+
+  <main class="container">
+    <div class="heading-row">
+      <div>
+        <h2>Product List</h2>
+        <p class="muted">Your Trusted Partner in Sweetness.</p>
+      </div>
+      <button class="btn primary" onclick="openAdd()">＋ Add Product</button>
+    </div>
+
+    <form class="search" method="get" action="/products">
+      <input name="q" value="{{ q }}" placeholder="🔍 Search product by name...">
+      <button class="btn secondary" type="submit">Search</button>
+      {% if q %}<a class="clear" href="/products">Clear</a>{% endif %}
+    </form>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Qnt</th>
+            <th>Price (Wholesale)</th>
+            <th>Price (Retailer)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for p in products %}
+          <tr>
+            <td class="product-name">{{ p.name }}</td>
+            <td>{{ p.quantity }}</td>
+            <td>₹{{ "%.2f"|format(p.wholesale_price) }}</td>
+            <td>₹{{ "%.2f"|format(p.retailer_price) }}</td>
+            <td class="actions">
+              <button class="icon edit" onclick='openEdit({{ p.id }}, {{ p.name|tojson }}, {{ p.quantity }}, {{ p.wholesale_price }}, {{ p.retailer_price }})'>✏️ Edit</button>
+              <form method="post" action="/products/{{ p.id }}/delete" onsubmit="return confirm('Delete this product?')">
+                <button class="icon delete" type="submit">🗑️ Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="empty">No products found.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <div class="modal" id="productModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Add Product</h3>
+        <button onclick="closeModal()">×</button>
+      </div>
+      <form id="productForm" method="post" action="/products/add">
+        <label>Product Name</label>
+        <input id="name" name="name" required>
+        <label>Quantity</label>
+        <input id="quantity" name="quantity" type="number" min="0" required>
+        <label>Price (Wholesale)</label>
+        <input id="wholesale" name="wholesale_price" type="number" min="0" step="0.01" required>
+        <label>Price (Retailer)</label>
+        <input id="retailer" name="retailer_price" type="number" min="0" step="0.01" required>
+        <div class="modal-actions">
+          <button class="btn secondary" type="button" onclick="closeModal()">Cancel</button>
+          <button class="btn primary" type="submit" id="saveBtn">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+const modal = document.getElementById("productModal");
+const form = document.getElementById("productForm");
+function openAdd() {
+  document.getElementById("modalTitle").textContent = "Add Product";
+  document.getElementById("saveBtn").textContent = "Save Product";
+  form.action = "/products/add";
+  form.reset();
+  modal.classList.add("show");
+}
+function openEdit(id, name, qty, wholesale, retailer) {
+  document.getElementById("modalTitle").textContent = "Edit Product";
+  document.getElementById("saveBtn").textContent = "Update Product";
+  form.action = "/products/" + id + "/update";
+  document.getElementById("name").value = name;
+  document.getElementById("quantity").value = qty;
+  document.getElementById("wholesale").value = wholesale;
+  document.getElementById("retailer").value = retailer;
+  modal.classList.add("show");
+}
+function closeModal() { modal.classList.remove("show"); }
+window.onclick = e => { if (e.target === modal) closeModal(); };
+</script>
+</body>
+</html>

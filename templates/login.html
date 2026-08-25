@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Sawariya Confectionary</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <div class="logo">🍭</div>
+    <h1>Sawariya Confectionary</h1>
+    <p class="muted">Sign in to manage products</p>
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post" action="/login">
+      <label>Username</label>
+      <input name="username" placeholder="Enter username" required autofocus>
+      <label>Password</label>
+      <input name="password" type="password" placeholder="Enter password" required>
+      <button class="btn primary full" type="submit">Login</button>
+    </form>
+    <a class="back" href="/">← Back to home</a>
+  </div>
+</body>
+</html>
