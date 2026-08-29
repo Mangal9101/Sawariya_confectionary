@@ -118,7 +118,7 @@ body {
 }
 
 /* =========================
-   LOGIN
+   LOGIN PAGE
 ========================= */
 
 .login-page {
@@ -269,7 +269,7 @@ input:focus {
 }
 
 /* =========================
-   PRODUCT TABLE
+   PRODUCT TABLE - DESKTOP
 ========================= */
 
 .table-wrap {
@@ -279,7 +279,6 @@ input:focus {
   box-shadow: 0 10px 35px rgba(70,40,15,.08);
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -416,11 +415,15 @@ td {
 
 /* =====================================================
    MOBILE
+   TABLE BECOMES CARD
 ===================================================== */
 
 @media (max-width: 650px) {
 
-  /* Topbar */
+  /* -------------------------
+     TOPBAR
+  ------------------------- */
+
   .topbar {
     align-items: flex-start;
     flex-direction: column;
@@ -437,13 +440,19 @@ td {
     font-size: 14px;
   }
 
-  /* Container */
+  /* -------------------------
+     CONTAINER
+  ------------------------- */
+
   .container {
     width: 94%;
     margin: 25px auto;
   }
 
-  /* Heading */
+  /* -------------------------
+     HEADING
+  ------------------------- */
+
   .heading-row {
     align-items: stretch;
     flex-direction: column;
@@ -459,7 +468,10 @@ td {
     text-align: center;
   }
 
-  /* Search */
+  /* -------------------------
+     SEARCH
+  ------------------------- */
+
   .search {
     width: 100%;
     display: flex;
@@ -481,48 +493,161 @@ td {
     padding: 12px 8px;
   }
 
-  /* Table */
+  /* =================================================
+     PRODUCT TABLE -> CARD
+  ================================================= */
+
   .table-wrap {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 14px;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
   }
 
   table {
-    width: 700px;
-    min-width: 700px;
+    width: 100% !important;
+    min-width: 0 !important;
+    display: block;
+    border-collapse: separate;
+    border-spacing: 0;
   }
 
-  th,
-  td {
-    padding: 12px 10px;
-    font-size: 13px;
-    white-space: nowrap;
+  /* Hide table heading on mobile */
+  thead {
+    display: none;
   }
 
-  th {
-    font-size: 12px;
+  tbody {
+    display: block;
+    width: 100%;
+  }
+
+  /* Each product becomes a card */
+  tbody tr {
+    display: block;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #eee5dc;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    box-shadow: 0 6px 20px rgba(70,40,15,.08);
+  }
+
+  /* Each table cell becomes a row */
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 42px;
+    padding: 11px 4px;
+    border-bottom: 1px solid #eee5dc;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  tbody td:last-child {
+    border-bottom: none;
+  }
+
+  /* -------------------------
+     LABELS
+  ------------------------- */
+
+  tbody td:nth-child(1)::before {
+    content: "Product";
+    font-weight: 700;
+    color: #786f68;
+  }
+
+  tbody td:nth-child(2)::before {
+    content: "Quantity";
+    font-weight: 700;
+    color: #786f68;
+  }
+
+  tbody td:nth-child(3)::before {
+    content: "Wholesale Price";
+    font-weight: 700;
+    color: #786f68;
+  }
+
+  tbody td:nth-child(4)::before {
+    content: "Retailer Price";
+    font-weight: 700;
+    color: #786f68;
+  }
+
+  /* -------------------------
+     PRODUCT NAME
+  ------------------------- */
+
+  tbody td:nth-child(1) {
+    font-size: 16px;
   }
 
   .product-name {
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-weight: 800;
+    color: #241b15;
+    max-width: 60%;
+    overflow-wrap: anywhere;
+  }
+
+  /* -------------------------
+     ACTIONS
+  ------------------------- */
+
+  tbody td:nth-child(5) {
+    justify-content: flex-end;
+    gap: 7px;
+    padding-top: 14px;
+  }
+
+  tbody td:nth-child(5)::before {
+    display: none;
   }
 
   .actions {
-    display: flex;
-    gap: 5px;
+    display: flex !important;
+    justify-content: flex-end;
     align-items: center;
+    gap: 7px;
+    width: 100%;
   }
 
   .icon {
-    padding: 7px 9px;
-    font-size: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 9px;
   }
 
-  /* Modal */
+  .actions form {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* -------------------------
+     NO PRODUCTS
+  ------------------------- */
+
+  tbody tr:has(.empty) {
+    display: block;
+    padding: 20px;
+  }
+
+  .empty {
+    display: block;
+    text-align: center;
+    border: none;
+    padding: 25px 10px;
+  }
+
+  /* -------------------------
+     MODAL
+  ------------------------- */
+
   .modal {
     padding: 15px;
   }
@@ -541,7 +666,7 @@ td {
 }
 
 /* =====================================================
-   SMALL MOBILE
+   VERY SMALL MOBILE
 ===================================================== */
 
 @media (max-width: 400px) {
@@ -555,30 +680,28 @@ td {
   }
 
   .container {
-    width: 95%;
+    width: 94%;
   }
 
   .heading-row h2 {
     font-size: 24px;
   }
 
-  .table-wrap {
-    border-radius: 12px;
+  tbody tr {
+    padding: 7px 12px;
   }
 
-  table {
-    width: 650px;
-    min-width: 650px;
+  tbody td {
+    font-size: 13px;
+    padding: 10px 3px;
   }
 
-  th,
-  td {
-    padding: 10px 8px;
-    font-size: 12px;
+  tbody td:nth-child(1) {
+    font-size: 15px;
   }
 
   .icon {
-    padding: 6px 7px;
-    font-size: 11px;
+    padding: 7px 9px;
+    font-size: 12px;
   }
 }
